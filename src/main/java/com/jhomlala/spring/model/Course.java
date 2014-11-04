@@ -31,8 +31,8 @@ public class Course
 		this.departureTime = departureTime;
 		this.arrivalTime = arrivalTime;
 		this.symbols = symbols;
-		fromBSName = "";
-		toBSName = "";
+		this.fromBSName = "";
+		this.toBSName = "";
 	}
 	public int getCourseID() {
 		return courseID;
@@ -82,6 +82,7 @@ public class Course
 	public void setToBSName(String toBSName) {
 		this.toBSName = toBSName;
 	}
+	
 	
 	//List <BusStop> busStopList = new ArrayList<BusStop>();
 }

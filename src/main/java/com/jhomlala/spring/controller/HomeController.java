@@ -16,6 +16,7 @@ import com.jhomlala.spring.dao.BusStopDAO;
 import com.jhomlala.spring.dao.BusStopDAOImpl;
 import com.jhomlala.spring.dao.CourseDAO;
 import com.jhomlala.spring.dao.CourseDAOImpl;
+import com.jhomlala.spring.dao.CourseMapper;
 import com.jhomlala.spring.dao.TimeMapper;
 import com.jhomlala.spring.model.BusStop;
 import com.jhomlala.spring.model.Course;
@@ -57,35 +58,22 @@ public class HomeController {
 		MvcConfiguration config = new MvcConfiguration();
 		DataSource dataForDAO = config.getDataSource();
 		CourseDAOImpl CourseIMPL = new CourseDAOImpl(dataForDAO);
-		List <Course> csl = CourseIMPL.listCourses();
+		List <Course> courseList = CourseIMPL.listCourses();
 		
+		//Map Time class from String class
 		String time = request.getParameter("time");
 		TimeMapper timemap = new TimeMapper(time);
 		Time timeMapped = timemap.getTime();
 		
-		model.addObject("timeMapped",timeMapped);
-		
-		model.addObject("cslist", csl);
+		// get Bus list
 		List <BusStop> busStopList = Startup.getBusList();
-		for (int i=0;i<csl.size();i++)
-		{
-			for (int k=0;k<busStopList.size();k++)
-			{
-				if (csl.get(i).getFromBS() == busStopList.get(k).getId())
-				{
-					csl.get(i).setFromBSName(busStopList.get(k).getBusStopName());
-				}
-				if (csl.get(i).getToBS() == busStopList.get(k).getId())
-				{
-					csl.get(i).setToBSName(busStopList.get(k).getBusStopName());
-				}
-				
-			}
-		}
+		CourseMapper.changeCourseBusStopIDtoName(busStopList, courseList);
 		
 		
 		
 		
+		model.addObject("timeMapped",timeMapped);
+		model.addObject("cslist", courseList);
 	    model.setViewName("course");
 	    
 	    return model;
