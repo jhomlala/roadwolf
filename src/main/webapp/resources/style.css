@@ -1,0 +1,62 @@
+h1{
+font-family: 'Anonymous Pro',Arial ;
+} 
+
+h5{
+font-family: 'Anonymous Pro',Arial ;
+} 
+
+body
+{
+	background-color: white; 
+}
+
+
+img
+{
+	padding:1px;
+	border-style: dashed;
+	border-width:1px;
+}
+
+.above
+{
+	margin-left: 10px;
+}
+
+.main
+{
+	font-family: 'Anonymous Pro',Arial ;
+	font-size: 15px;
+	font-margin-left:10%;
+	border-style: dashed;
+	border-width:1px;
+	position: abosulute;
+	top:100px;
+	width:99%; 
+
+	heigth:40%;
+	
+}
+
+.container
+{
+	position:absolute;
+	left: 10%;
+	
+}
+
+.stats
+{
+	margin-top:2px;
+	font-family: 'Anonymous Pro',Arial ;
+	font-size: 15px;
+	font-margin-left:10%;
+	border-style: dashed;
+	border-width:1px;
+	position:fixed;
+	bottom :20px;
+	width:99%; 
+
+	
+}
