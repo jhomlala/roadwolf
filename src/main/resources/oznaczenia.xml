@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog>
+<symbol>
+	<short>a</short>
+	<description>nie kursuje w pierwszy dzień Świąt Wielkanocnych oraz w dniu 25 XII</description>
+</symbol>
+<symbol>
+	<short>b</short>
+	<description>nie kursuje w dniu 1.I, w pierwszy dzień Świąt Wielkanocnych i w dniu 25 XII</description>
+</symbol>
+<symbol>
+	<short>C</short>
+	<description>kursuje w soboty, niedziele i święta</description>
+</symbol>
+<symbol>
+	<short>c</short>
+	<description>nie kursuje w dniu 1.I, w pierwszy dzień Świąt Wielkanocnych oraz w dniach 25 i 26 XII</description>
+</symbol>
+<symbol>
+	<short>D</short>
+	<description>kursuje od poniedziałku do piątku oprócz świąt</description>
+</symbol>
+<symbol>
+	<short>d</short>
+	<description>nie kursuje w dniu 1.I, w pierwszy i drugi dzień Świąt Wielkanocnych oraz w dniach 25 i 26 XII</description>
+</symbol>
+<symbol>
+	<short>E</short>
+	<description>kursuje od poniedziałku do soboty oprócz świąt</description>
+</symbol>
+<symbol>
+	<short>e</short>
+	<description>nie kursuje w okresie ferii letnich</description>
+</symbol>
+<symbol>
+	<short>G</short>
+	<description>nie kursuje od poniedziałku do piątku w okresie wakacji szkolnych i ferii</description>
+</symbol>
+<symbol>
+	<short>g</short>
+	<description>nie kursuje w dniu 24.XII</description>
+</symbol>
+<symbol>
+	<short>H</short>
+	<description>kursuje w okresie ferii letnich i zimowych oraz szkolnych przerw świątecznych</description>
+</symbol>
+<symbol>
+	<short>L</short>
+	<description>kursuje w okresie ferii letnich</description>
+</symbol>
+<symbol>
+	<short>m</short>
+	<description>nie kursuje w dniach 24 i 31.XII</description>
+</symbol>
+<symbol>
+	<short>n</short>
+	<description>nie kursuje w Wielką Sobotę oraz w dniach 24 i 31.XII</description>
+</symbol>
+<symbol>
+	<short>S</short>
+	<description>kursuje w dni nauki szkolnej z wyjątkiem  02.I, oraz 05.VI,</description>
+</symbol>
+</catalog>

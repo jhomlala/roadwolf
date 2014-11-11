@@ -18,7 +18,7 @@ import com.jhomlala.spring.dao.CourseDAO;
 import com.jhomlala.spring.dao.CourseDAOImpl;
 import com.jhomlala.spring.dao.CourseMapper;
 import com.jhomlala.spring.dao.TimeMapper;
-import com.jhomlala.spring.model.BusStop;
+
 import com.jhomlala.spring.model.Course;
 import com.jhomlala.spring.model.Time;
 
@@ -66,8 +66,8 @@ public class HomeController {
 		Time timeMapped = timemap.getTime();
 		
 		// get Bus list
-		List <BusStop> busStopList = Startup.getBusList();
-		CourseMapper.changeCourseBusStopIDtoName(busStopList, courseList);
+		//List <BusStop> busStopList = Startup.getBusList();
+		//CourseMapper.changeCourseBusStopIDtoName(busStopList, courseList);
 		
 		
 		

@@ -9,8 +9,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import com.jhomlala.spring.model.BusStop;
 import com.jhomlala.spring.model.Course;
+import com.jhomlala.spring.model.Stop;
+import com.jhomlala.spring.model.Time;
 
 public class BusStopDAOImpl implements BusStopDAO {
 
@@ -31,18 +32,20 @@ public class BusStopDAOImpl implements BusStopDAO {
 	
 
 	@Override
-	public BusStop get(int contactId) {
-		String sql = "SELECT * FROM busstop WHERE BUSSTOPID=" + contactId;
-		return jdbcTemplate.query(sql, new ResultSetExtractor<BusStop>() {
+	public Stop get(int stopID) {
+		String sql = "SELECT * FROM stop WHERE STOP_ID=" + stopID;
+		return jdbcTemplate.query(sql, new ResultSetExtractor<Stop>() {
 
 			@Override
-			public BusStop extractData(ResultSet rs) throws SQLException,
+			public Stop extractData(ResultSet rs) throws SQLException,
 					DataAccessException {
 				if (rs.next()) {
-					BusStop busStop = new BusStop(
-							rs.getInt("BUSSTOPID"),
-							rs.getString("NAME") 
-						 
+					Stop busStop = new Stop(
+							rs.getInt("STOP ID"),
+							rs.getInt("COURSE_ID"),
+							rs.getInt("CITY_ID"),
+							new Time(rs.getString("ARRIVAL_TIME")),
+							new Time(rs.getString("DEPARTURE_TIME"))
 						);
 					return busStop;
 				}

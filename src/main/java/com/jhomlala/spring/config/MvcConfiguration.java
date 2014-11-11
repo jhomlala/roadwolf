@@ -20,7 +20,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 @ComponentScan(basePackages="net.codejava.spring")
 @EnableWebMvc
-public class MvcConfiguration extends WebMvcConfigurerAdapter{
+public class MvcConfiguration extends WebMvcConfigurerAdapter{ 
 
 	@Bean
 	public ViewResolver getViewResolver(){
@@ -39,7 +39,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	public DataSource getDataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/pks");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/roadwolf");
 		dataSource.setUsername("root");
 		dataSource.setPassword("");
 		
