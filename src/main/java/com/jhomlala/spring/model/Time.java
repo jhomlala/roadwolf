@@ -1,10 +1,12 @@
 package com.jhomlala.spring.model;
 
+import com.jhomlala.spring.dao.TimeMapper;
+
 public class Time 
 {
-	int hour;
-	int minute;
-	int second;
+	private int hour;
+	private int minute;
+	private int second;
 	/**
 	 * @param hour
 	 * @param minute
@@ -19,9 +21,15 @@ public class Time
 	
 	public Time()
 	{
-		this.hour = 0;
-		this.minute = 0;
-		this.second = 0;
+		
+	}
+	
+	public Time(String timeToExplode)
+	{
+		TimeMapper timeMapper = new TimeMapper(timeToExplode);
+		this.hour = timeMapper.getTime().getHour();
+		this.minute = timeMapper.getTime().getMinute();
+		this.hour = timeMapper.getTime().getHour();
 	}
 	public int getHour() {
 		return hour;

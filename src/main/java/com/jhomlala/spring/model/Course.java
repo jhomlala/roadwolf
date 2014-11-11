@@ -5,34 +5,18 @@ import java.util.List;
 
 public class Course 
 {
-	int courseID;
-	int fromBS;
-	int toBS;
-	String departureTime;
-	String arrivalTime;
-	String symbols;
-	String fromBSName;
-	String toBSName;
+	private int courseID;
+	private int operatorID;
+	private int departureCityID;
+	private int arrivalCityID;
+	private Time departureTime;
+	private Time arrivalTime;
+	private List <Stop> stopList;
+	private List <Symbol> symbolList;
 	
-	/**
-	 * @param courseID
-	 * @param fromBS
-	 * @param toBS
-	 * @param departureTime
-	 * @param arrivalTime
-	 * @param symbols
-	 */
-	public Course(int courseID, int fromBS, int toBS, String departureTime,
-			String arrivalTime, String symbols) {
-		super();
-		this.courseID = courseID;
-		this.fromBS = fromBS;
-		this.toBS = toBS;
-		this.departureTime = departureTime;
-		this.arrivalTime = arrivalTime;
-		this.symbols = symbols;
-		this.fromBSName = "";
-		this.toBSName = "";
+	public Course()
+	{
+		
 	}
 	public int getCourseID() {
 		return courseID;
@@ -40,51 +24,50 @@ public class Course
 	public void setCourseID(int courseID) {
 		this.courseID = courseID;
 	}
-	public int getFromBS() {
-		return fromBS;
+	public int getOperatorID() {
+		return operatorID;
 	}
-	public void setFromBS(int fromBS) {
-		this.fromBS = fromBS;
+	public void setOperatorID(int operatorID) {
+		this.operatorID = operatorID;
 	}
-	public int getToBS() {
-		return toBS;
+	public int getDepartureCityID() {
+		return departureCityID;
 	}
-	public void setToBS(int toBS) {
-		this.toBS = toBS;
+	public void setDepartureCityID(int departureCityID) {
+		this.departureCityID = departureCityID;
 	}
-	public String getDepartureTime() {
+	public int getArrivalCityID() {
+		return arrivalCityID;
+	}
+	public void setArrivalCityID(int arrivalCityID) {
+		this.arrivalCityID = arrivalCityID;
+	}
+	public Time getDepartureTime() {
 		return departureTime;
 	}
-	public void setDepartureTime(String departureTime) {
+	public void setDepartureTime(Time departureTime) {
 		this.departureTime = departureTime;
 	}
-	public String getArrivalTime() {
+	public Time getArrivalTime() {
 		return arrivalTime;
 	}
-	public void setArrivalTime(String arrivalTime) {
+	public void setArrivalTime(Time arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
-	public String getSymbols() {
-		return symbols;
+	public List<Stop> getStopList() {
+		return stopList;
 	}
-	public void setSymbols(String symbols) {
-		this.symbols = symbols;
+	public void setStopList(List<Stop> stopList) {
+		this.stopList = stopList;
 	}
-	public String getFromBSName() {
-		return fromBSName;
+	public List<Symbol> getSymbolList() {
+		return symbolList;
 	}
-	public void setFromBSName(String fromBSName) {
-		this.fromBSName = fromBSName;
-	}
-	public String getToBSName() {
-		return toBSName;
-	}
-	public void setToBSName(String toBSName) {
-		this.toBSName = toBSName;
+	public void setSymbolList(List<Symbol> symbolList) {
+		this.symbolList = symbolList;
 	}
 	
 	
-	//List <BusStop> busStopList = new ArrayList<BusStop>();
 }
 
 

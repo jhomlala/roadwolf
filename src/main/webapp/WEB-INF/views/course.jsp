@@ -23,7 +23,7 @@
     	</tr>
     <c:forEach var="element" items="${cslist}">
     	<tr>
-   		<td>${element.getFromBSName()}</td><td>${element.getToBSName()}</td><td>${element.getArrivalTime()}</td><td>${element.getDepartureTime()}</td><td>${element.getSymbols()}</td>
+   		<td>${element.getDepartureCityID()}</td><td>${element.getArrivalCityID()}</td><td>${element.getArrivalTime()}</td><td>${element.getDepartureTime()}</td><td>symbol</td>
    		</tr>
 	</c:forEach>
     
