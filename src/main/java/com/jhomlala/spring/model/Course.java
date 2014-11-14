@@ -13,6 +13,10 @@ public class Course
 	private Time arrivalTime;
 	private List <Stop> stopList;
 	private List <Symbol> symbolList;
+	private City departureCity;
+	private City arrivalCity;
+	private String symbols;
+	
 	
 	public Course()
 	{
@@ -66,7 +70,24 @@ public class Course
 	public void setSymbolList(List<Symbol> symbolList) {
 		this.symbolList = symbolList;
 	}
-	
+	public City getDepartureCity() {
+		return departureCity;
+	}
+	public void setDepartureCity(City departureCity) {
+		this.departureCity = departureCity;
+	}
+	public City getArrivalCity() {
+		return arrivalCity;
+	}
+	public void setArrivalCity(City arrivalCity) {
+		this.arrivalCity = arrivalCity;
+	}
+	public String getSymbols() {
+		return symbols;
+	}
+	public void setSymbols(String symbols) {
+		this.symbols = symbols;
+	}
 	
 }
 

@@ -18,8 +18,9 @@ import com.jhomlala.spring.dao.CourseDAO;
 import com.jhomlala.spring.dao.CourseDAOImpl;
 import com.jhomlala.spring.dao.CourseMapper;
 import com.jhomlala.spring.dao.TimeMapper;
-
+import com.jhomlala.spring.model.City;
 import com.jhomlala.spring.model.Course;
+import com.jhomlala.spring.model.Symbol;
 import com.jhomlala.spring.model.Time;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,10 +66,11 @@ public class HomeController {
 		TimeMapper timemap = new TimeMapper(time);
 		Time timeMapped = timemap.getTime();
 		
-		// get Bus list
-		//List <BusStop> busStopList = Startup.getBusList();
-		//CourseMapper.changeCourseBusStopIDtoName(busStopList, courseList);
 		
+		List <City> cityList = Startup.getCityMapper().getCityList();
+		List <Symbol> symbolList = Startup.getSymbolMapper().getSymbolList();
+		courseList = CourseMapper.loadCityNames(courseList,cityList);
+		courseList = CourseMapper.loadSymbols(courseList,symbolList);
 		
 		
 		

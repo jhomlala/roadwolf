@@ -7,6 +7,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import com.jhomlala.spring.model.Course;
+import com.jhomlala.spring.model.Time;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -38,22 +39,24 @@ public class CourseDAOImpl implements CourseDAO {
 
 	@Override
 	public Course get(int contactId) {
-		String sql = "SELECT * FROM courses WHERE COURSEID=" + contactId;
+		String sql = "SELECT * FROM course WHERE COURSE_ID=" + contactId;
 		return jdbcTemplate.query(sql, new ResultSetExtractor<Course>() {
-
+ 
 			@Override
 			public Course extractData(ResultSet rs) throws SQLException,
 					DataAccessException {
 				if (rs.next()) {
-					Course course = new Course(
-							rs.getInt("COURSEID"),
-							rs.getInt("FROMID"), 
-							rs.getInt("TOID"), 
-							rs.getString("DEPARTURETIME"), 
-							rs.getString("ARRIVALTIME"), 
-							rs.getString("SYMBOLS")
-						 
-						);
+					   Course course = new Course();
+					   course.setCourseID(rs.getInt("COURSE_ID"));
+					   course.setOperatorID(rs.getInt("OPERATOR_ID"));
+					   course.setDepartureCityID(rs.getInt("CITY_DEPARTURE_ID"));
+					   course.setArrivalCityID(rs.getInt("ARRIVAL_CITY_ID"));
+					   course.setDepartureTime(new Time(rs.getString("DEPARTURE_TIME")));
+					   course.setArrivalTime(new Time(rs.getString("ARRIVAL_TIME")));
+					   course.setStopList(new BusStopMapper(rs.getString("STOP_LIST")).getStopList());
+					   course.setSymbols(rs.getString("SYMBOLS"));
+	
+				  
 					return course;
 				}
 				
@@ -68,7 +71,7 @@ public class CourseDAOImpl implements CourseDAO {
 	@Override
 	public List<Course> listCourses() 
 	{
-		 String SQL = "select * from courses";
+		 String SQL = "select * from course";
 	     List <Course> courses = jdbcTemplate.query(SQL, 
                   new CourseMapper());
 	      return courses;

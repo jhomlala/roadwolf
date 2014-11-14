@@ -6,24 +6,38 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+          <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery.timepicker.js"></script>
+		  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/tooltipsy.min.js"></script>
+		  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/jquery.timepicker.css" />
+		
+
         
 		
         <link href="${pageContext.request.contextPath}/resources/style.css" rel="stylesheet" >
-        <title>Rozkład jazdy PKS Zielona Góra </title>
+        <title>RoadWolf.pl </title>
     </head>
     <body>
-    <center><h1>Rozkład jazdy</h1></center>
+    <center><h1>RoadWolf.pl - Rozkład jazdy</h1></center>
     <div class="main">
-    ${timeMapped.getHour()}
     <center>
-    <h2>Rozkład dla trasy Krosno Odrzańskie -> Zielona Góra</h2><br>
+
     <table>
     	<tr>
-    		<td>Skad</td><td>Dokad</td><td>Przyjazd</td><td>Odjazd</td><td>Oznaczenia</td>
+    		<td>Skad</td><td>Dokad</td><td>Odjazd</td><td>Przyjazd</td><td>Oznaczenia</td>
     	</tr>
     <c:forEach var="element" items="${cslist}">
     	<tr>
-   		<td>${element.getDepartureCityID()}</td><td>${element.getArrivalCityID()}</td><td>${element.getArrivalTime()}</td><td>${element.getDepartureTime()}</td><td>symbol</td>
+   			<td>${element.getDepartureCity().getCityName()}</td>
+   			<td>${element.getArrivalCity().getCityName()}</td>
+   			<td><c:if test="${element.getDepartureTime().getHour()<10}"><c:out value="0"/></c:if>${element.getDepartureTime().getHour()}:<c:if test="${element.getDepartureTime().getMinute()<10}"><c:out value="0"/></c:if>${element.getDepartureTime().getMinute()}</td>
+   			<td><c:if test="${element.getArrivalTime().getHour()<10}"><c:out value="0"/></c:if>${element.getArrivalTime().getHour()}:<c:if test="${element.getArrivalTime().getMinute()<10}"><c:out value="0"/></c:if>${element.getArrivalTime().getMinute()}</td>
+   			<td><c:forEach items="${element.getSymbolList()}" var="symbol">
+
+                     <a href="#" class='hastip' title='${symbol.getSymbolDescription()}'>${symbol.getSymbolShort()}</a>
+        
+                 </c:forEach>
+            </td>
    		</tr>
 	</c:forEach>
     
@@ -35,5 +49,7 @@
     
     
     
-    
+    <script type="text/javascript">
+		$('.hastip').tooltipsy();
+	</script>
 </html>

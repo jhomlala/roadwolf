@@ -8,27 +8,26 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery.timepicker.js"></script>
+		  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/tooltipsy.min.js"></script>
 		  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/jquery.timepicker.css" />
 		
 
         
 		
         <link href="${pageContext.request.contextPath}/resources/style.css" rel="stylesheet" >
-        <title>Rozkład jazdy PKS Zielona Góra </title>
+        <title>RoadWolf.pl </title>
     </head>
     <body>
-    <center><h1>Rozkład jazdy</h1></center>
+    <center><h1>RoadWolf.pl - Rozkład jazdy</h1></center>
     <div class="main">
     <center>
-    <h2>Rozkład dla trasy Krosno Odrzańskie -> Zielona Góra</h2><br>
-    <h3>Wybierz godzine:</h3>
-
-  
-      
-    
-    
-    <form action="/tf2la/course"  method="post">
-    <p><input id="timeformatExample1" type="text" class="time" name="time" /> 
+    <form action="/tf2la/course"  method="post"> 
+		<br>
+		
+	    Z: <input id="city" class='hastip' title='Miejscowosc z ktorej chcesz wyruszyc.' type="text"  name="city" /> 
+	    Do:  <input id="city" class='hastip' title='Miejscowosc do ktorej chcesz dotrzec.' type="text"  name="city" />
+	    <br><br><br>  
+        Czas:<input id="timeformatExample1" type="text" class="time hastip" title='Czas o ktorej chcesz wyruszyc.' name="time" /> 
 
             <script>
                 $(function() {
@@ -36,8 +35,9 @@
                 });
             </script>
     <br><br><input type="submit">
-    </p>
+    
     </form>
+    </center>
 	</div> <br><br>
 
     	
@@ -45,5 +45,7 @@
     
     
     
-    
+     <script type="text/javascript">
+		$('.hastip').tooltipsy();
+	</script>
 </html>

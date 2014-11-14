@@ -13,44 +13,52 @@ import org.springframework.stereotype.Component;
 import com.jhomlala.spring.config.MvcConfiguration;
 import com.jhomlala.spring.dao.BusStopDAO;
 import com.jhomlala.spring.dao.BusStopDAOImpl;
-import com.jhomlala.spring.model.BusStop;
+import com.jhomlala.spring.dao.CityMapper;
+import com.jhomlala.spring.dao.SymbolMapper;
+import com.jhomlala.spring.dao.TerritorialMapper;
+
 
 @Component
 public class Startup implements ApplicationListener<ContextRefreshedEvent> {
 	
-	@Autowired
-	private static BusStopDAO busStopDAO;
-	
-  private static List <BusStop> busStopList = new ArrayList<BusStop>();
+
+	private static TerritorialMapper territorialMapper;
+	private static CityMapper cityMapper;
+	private static SymbolMapper symbolMapper;
 	
   @Override
   public void onApplicationEvent(final ContextRefreshedEvent event) 
   {
-		MvcConfiguration config = new MvcConfiguration();
-		DataSource dataForDAO = config.getDataSource();
-		BusStopDAOImpl busIMPL = new BusStopDAOImpl(dataForDAO);
-		BusStop bus = busIMPL.get(1);
-		
-		System.out.println("Creating BusStop list.");
-		for (int i=0;i<100;i++)
-		{
-			BusStop buss = busIMPL.get(i);
-			if (!(buss==null))
-			{
-				busStopList.add(buss);
-			}
-			else
-			{
-				System.out.println("ID: "+i+" is empty. Skipping.");
-			
-			}
-			
-		}
-		System.out.println("BusStop list created.");
+	  
+	  territorialMapper = new TerritorialMapper();
+	  cityMapper = new CityMapper(territorialMapper.getVoivodeshipList());
+	  symbolMapper = new SymbolMapper();
   }
+
+
+
+	public static TerritorialMapper getTerritorialMapper() {
+		return territorialMapper;
+	}
+
+
+
+	public static CityMapper getCityMapper() {
+		return cityMapper;
+	}
+
+
+	public static SymbolMapper getSymbolMapper() {
+		return symbolMapper;
+	}
+
+
+
+
+
+
+
+
   
-  public static List<BusStop> getBusList()
-  {
-	  return busStopList;
-  }
+  
 }

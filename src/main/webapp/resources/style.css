@@ -60,3 +60,19 @@ img
 
 	
 }
+  .tooltipsy
+{
+   padding: 10px;
+    color: #fff;
+    background-color: #222;
+    -moz-box-shadow: inset 0 0 10px #000;
+    -webkit-box-shadow: inset 0 0 10px #000;
+    box-shadow: inset 0 0 10px #000;
+    text-shadow: 0 0 3px #000;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    position: relative;
+
+}
+ 
