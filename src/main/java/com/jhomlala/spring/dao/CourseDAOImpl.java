@@ -38,32 +38,9 @@ public class CourseDAOImpl implements CourseDAO {
 	
 
 	@Override
-	public Course get(int contactId) {
-		String sql = "SELECT * FROM course WHERE COURSE_ID=" + contactId;
-		return jdbcTemplate.query(sql, new ResultSetExtractor<Course>() {
- 
-			@Override
-			public Course extractData(ResultSet rs) throws SQLException,
-					DataAccessException {
-				if (rs.next()) {
-					   Course course = new Course();
-					   course.setCourseID(rs.getInt("COURSE_ID"));
-					   course.setOperatorID(rs.getInt("OPERATOR_ID"));
-					   course.setDepartureCityID(rs.getInt("CITY_DEPARTURE_ID"));
-					   course.setArrivalCityID(rs.getInt("ARRIVAL_CITY_ID"));
-					   course.setDepartureTime(new Time(rs.getString("DEPARTURE_TIME")));
-					   course.setArrivalTime(new Time(rs.getString("ARRIVAL_TIME")));
-					   course.setStopList(new BusStopMapper(rs.getString("STOP_LIST")).getStopList());
-					   course.setSymbols(rs.getString("SYMBOLS"));
-	
-				  
-					return course;
-				}
-				
-				return null;
-			}
-			
-		});
+	public List <Course> listCoursesWithID(int courseID) {
+		String sql = "SELECT * FROM course WHERE COURSE_ID=" + courseID;
+		return jdbcTemplate.query(sql,new CourseMapper()); 
 	}
 
 
@@ -72,9 +49,36 @@ public class CourseDAOImpl implements CourseDAO {
 	public List<Course> listCourses() 
 	{
 		 String SQL = "select * from course";
-	     List <Course> courses = jdbcTemplate.query(SQL, 
-                  new CourseMapper());
-	      return courses;
+	     List <Course> courses = jdbcTemplate.query(SQL, new CourseMapper());
+	     return courses;
+	}
+
+
+
+	@Override
+	public List<Course> listCoursesWithCityID(int departureCityID, int arrivalCityID) 
+	{
+		String SQL = "select * from course WHERE CITY_DEPARTURE_ID = "+departureCityID+" AND CITY_ARRIVAL_ID = "+arrivalCityID;
+		List <Course> courses = jdbcTemplate.query(SQL, new CourseMapper());
+		return courses;
+	}
+
+
+
+	@Override
+	public List<Course> listCoursesWithDepartureCityID(int departureCityID) {
+		String SQL = "select * from course WHERE CITY_DEPARTURE_ID = "+departureCityID;
+		List <Course> courses = jdbcTemplate.query(SQL,new CourseMapper());
+		return courses;
+	}
+
+
+
+	@Override
+	public List<Course> listCoursesWithArrivalCityID(int arrivalCityID) {
+		String SQL = "select * from course WHERE CITY_ARRIVAL_ID = "+arrivalCityID;
+		List <Course> courses = jdbcTemplate.query(SQL,new CourseMapper());
+		return courses;
 	}
 
 }

@@ -13,9 +13,6 @@ import org.springframework.stereotype.Component;
 import com.jhomlala.spring.config.MvcConfiguration;
 import com.jhomlala.spring.dao.BusStopDAO;
 import com.jhomlala.spring.dao.BusStopDAOImpl;
-import com.jhomlala.spring.dao.CityMapper;
-import com.jhomlala.spring.dao.SymbolMapper;
-import com.jhomlala.spring.dao.TerritorialMapper;
 
 
 @Component

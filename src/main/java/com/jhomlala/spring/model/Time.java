@@ -1,6 +1,6 @@
 package com.jhomlala.spring.model;
 
-import com.jhomlala.spring.dao.TimeMapper;
+import com.jhomlala.spring.controller.TimeMapper;
 
 public class Time 
 {

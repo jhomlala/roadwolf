@@ -2,6 +2,7 @@ package com.jhomlala.spring.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -24,9 +25,9 @@ public class BusStopDAOImpl implements BusStopDAO {
 	
 
 	@Override
-	public void delete(int contactId) {
+	public void delete(int  stopID) {
 		String sql = "DELETE FROM busstop WHERE BUSSTOPID=?";
-		jdbcTemplate.update(sql, contactId);
+		jdbcTemplate.update(sql, stopID);
 	}
 
 	
@@ -54,6 +55,16 @@ public class BusStopDAOImpl implements BusStopDAO {
 			}
 			
 		});
+	}
+
+
+
+	@Override
+	public List<Stop> listStopsWithID(int courseID) {
+		String SQL = "select * from stop where COURSE_ID = "+courseID;
+	     List <Stop> stopList = jdbcTemplate.query(SQL, new BusStopMapper());
+	      jdbcTemplate.query(SQL, new BusStopMapper());
+		return stopList;
 	}
 
 

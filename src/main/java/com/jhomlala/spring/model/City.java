@@ -16,7 +16,7 @@ public class City
 		this.districtName = districtName;
 	}
 	public String getVoivodeshipName() {
-		return voivodeshipName;
+		return voivodeshipName; 
 	}
 	public void setVoivodeshipName(String voivodeshipName) {
 		this.voivodeshipName = voivodeshipName;

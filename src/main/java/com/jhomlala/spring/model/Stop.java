@@ -7,7 +7,7 @@ public class Stop
 	private int cityID;
 	private Time arrivalTime;
 	private Time departureTime;
-	
+	private String cityName;
 	
 	
 	/**
@@ -17,6 +17,10 @@ public class Stop
 	 * @param arrivalTime
 	 * @param departureTime
 	 */
+	public Stop()
+	{
+		
+	}
 	public Stop(int stopID, int courseID, int cityID, Time arrivalTime,
 			Time departureTime) {
 		super();
@@ -55,6 +59,12 @@ public class Stop
 	}
 	public void setDepartureTime(Time departureTime) {
 		this.departureTime = departureTime;
+	}
+	public String getCityName() {
+		return cityName;
+	}
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
 	}
 	
 	

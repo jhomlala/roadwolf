@@ -75,4 +75,9 @@ img
     position: relative;
 
 }
- 
+.ui-dialog-title {
+    font-size:10px !important;
+}
+.ui-dialog-content {
+	font-size:10px !important;
+}

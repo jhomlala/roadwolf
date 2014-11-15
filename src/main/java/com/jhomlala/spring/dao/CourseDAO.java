@@ -16,8 +16,13 @@ public interface CourseDAO {
 	
 	public void delete(int contactId);
 	
-	public Course get(int contactId);
+	public List <Course> listCoursesWithID(int courseID);
 	
 	public List<Course> listCourses();
 
+	public List <Course> listCoursesWithCityID(int departureCityID,int arrivalCityID);
+	
+	public List <Course> listCoursesWithDepartureCityID(int departureCityID);
+	
+	public List <Course> listCoursesWithArrivalCityID(int arrivalCityID);
 }

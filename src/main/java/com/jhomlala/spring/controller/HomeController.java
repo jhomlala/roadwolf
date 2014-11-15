@@ -17,9 +17,9 @@ import com.jhomlala.spring.dao.BusStopDAOImpl;
 import com.jhomlala.spring.dao.CourseDAO;
 import com.jhomlala.spring.dao.CourseDAOImpl;
 import com.jhomlala.spring.dao.CourseMapper;
-import com.jhomlala.spring.dao.TimeMapper;
 import com.jhomlala.spring.model.City;
 import com.jhomlala.spring.model.Course;
+import com.jhomlala.spring.model.Stop;
 import com.jhomlala.spring.model.Symbol;
 import com.jhomlala.spring.model.Time;
 
@@ -43,9 +43,9 @@ public class HomeController {
 	private BusStopDAO busStopDAO;
 	
 	@RequestMapping(value="/")
-	public ModelAndView listContact(ModelAndView model) throws IOException{
-
-
+	public ModelAndView home(ModelAndView model) {
+		
+		
 
 	
 	model.setViewName("home");
@@ -56,25 +56,17 @@ public class HomeController {
 	@RequestMapping(value = "course", method = RequestMethod.POST)
 	public ModelAndView viewPlayer(ModelAndView model,HttpServletRequest request) throws IOException 
 	{
-		MvcConfiguration config = new MvcConfiguration();
-		DataSource dataForDAO = config.getDataSource();
-		CourseDAOImpl CourseIMPL = new CourseDAOImpl(dataForDAO);
-		List <Course> courseList = CourseIMPL.listCourses();
+
+		List <Course> courseList = CourseSearch.findDirectConnection(64653, 990641);
 		
 		//Map Time class from String class
 		String time = request.getParameter("time");
-		TimeMapper timemap = new TimeMapper(time);
-		Time timeMapped = timemap.getTime();
+		//TimeMapper timemap = new TimeMapper(time);
+		//Time timeMapped = timemap.getTime();
+		 
 		
 		
-		List <City> cityList = Startup.getCityMapper().getCityList();
-		List <Symbol> symbolList = Startup.getSymbolMapper().getSymbolList();
-		courseList = CourseMapper.loadCityNames(courseList,cityList);
-		courseList = CourseMapper.loadSymbols(courseList,symbolList);
-		
-		
-		
-		model.addObject("timeMapped",timeMapped);
+		//model.addObject("timeMapped",timeMapped);
 		model.addObject("cslist", courseList);
 	    model.setViewName("course");
 	    
