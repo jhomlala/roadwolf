@@ -22,6 +22,7 @@ import com.jhomlala.spring.model.Course;
 import com.jhomlala.spring.model.Stop;
 import com.jhomlala.spring.model.Symbol;
 import com.jhomlala.spring.model.Time;
+import com.jhomlala.spring.model.Vertex;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,8 +46,13 @@ public class HomeController {
 	@RequestMapping(value="/")
 	public ModelAndView home(ModelAndView model) {
 		
-	
-
+	GraphSearch GS = new GraphSearch();
+	List <Vertex> vertexList = Startup.getGraphBuilder().getGraph();
+	Vertex a = Startup.getGraphBuilder().getVertexWithID(64653);
+	Vertex b = Startup.getGraphBuilder().getVertexWithID(101);
+	System.out.println(a.getVertexID());
+	System.out.println(b.getVertexID());
+	GS.findNodesBetweenPoints(a, b);
 	
 	model.setViewName("home");
 		return model;
@@ -56,7 +62,7 @@ public class HomeController {
 	@RequestMapping(value = "course", method = RequestMethod.POST)
 	public ModelAndView viewPlayer(ModelAndView model,HttpServletRequest request) throws IOException 
 	{
-		CourseSearch courseSearch = new CourseSearch(64653, 0);
+		CourseSearch courseSearch = new CourseSearch(99064, 100); 
 		
 		//List <Course> courseList = CourseSearch.findDirectConnection(64653, 990641);
 		List <Course> courseList = null;

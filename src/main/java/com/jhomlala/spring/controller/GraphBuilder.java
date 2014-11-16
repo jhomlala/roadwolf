@@ -25,8 +25,11 @@ public class GraphBuilder
 	{
 		buildCourseList();
 		buildGraph();
-		drawGraph();
+		//drawGraph();
 	}
+	
+	
+	
 	
 	
 	public List<Vertex> getGraph()
@@ -136,6 +139,16 @@ public class GraphBuilder
 		courseList = CourseController.loadStopListCityNames(courseList,cityList);
 		
 	
+	}
+	
+	public Vertex getVertexWithID(int id)
+	{
+		for (int i=0;i<vertexList.size();i++)
+		{
+			if (vertexList.get(i).getVertexID()==id)
+				return vertexList.get(i);
+		}
+		return null;
 	}
 	
 }
