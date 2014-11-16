@@ -45,7 +45,7 @@ public class HomeController {
 	@RequestMapping(value="/")
 	public ModelAndView home(ModelAndView model) {
 		
-		
+	
 
 	
 	model.setViewName("home");
@@ -56,9 +56,10 @@ public class HomeController {
 	@RequestMapping(value = "course", method = RequestMethod.POST)
 	public ModelAndView viewPlayer(ModelAndView model,HttpServletRequest request) throws IOException 
 	{
-
-		List <Course> courseList = CourseSearch.findDirectConnection(64653, 990641);
+		CourseSearch courseSearch = new CourseSearch(64653, 0);
 		
+		//List <Course> courseList = CourseSearch.findDirectConnection(64653, 990641);
+		List <Course> courseList = null;
 		//Map Time class from String class
 		String time = request.getParameter("time");
 		//TimeMapper timemap = new TimeMapper(time);

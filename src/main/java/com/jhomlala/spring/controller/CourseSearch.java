@@ -1,4 +1,5 @@
 package com.jhomlala.spring.controller;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -13,7 +14,8 @@ public class CourseSearch
 	
 	public CourseSearch(int departureCityID,int arrivalCityID)
 	{
-		List <Course> listAfterSearchDirectConnection = findDirectConnection(departureCityID,arrivalCityID);
+		List <Course> listAfterSearchDirectConnection = findConnection(departureCityID,arrivalCityID);
+		System.out.println(listAfterSearchDirectConnection.size());
 		if (listAfterSearchDirectConnection.size() > 0 )
 		{
 			// yeah! direct connection!
@@ -21,6 +23,10 @@ public class CourseSearch
 		}
 		else
 		{
+			List <ArrayList<Course>> listOfListOfCourses = new ArrayList<ArrayList<Course>>();
+			
+			
+			
 			// oh :( no direct connections. but we can still something find
 			System.out.println("No direct");
 		}
@@ -29,7 +35,7 @@ public class CourseSearch
 	
 	
 	
-	public static List <Course> findDirectConnection(int departureCityID,int arrivalCityID)
+	public static List <Course> findConnection(int departureCityID,int arrivalCityID)
 	{
 		MvcConfiguration config = new MvcConfiguration();
 		DataSource dataForDAO = config.getDataSource();
@@ -47,4 +53,6 @@ public class CourseSearch
 		
 		return courseList;
 	}
+	
+	
 }
