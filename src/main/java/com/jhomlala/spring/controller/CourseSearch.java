@@ -11,7 +11,7 @@ import com.jhomlala.spring.model.*;
 public class CourseSearch 
 
 {
-	
+	/*
 	public CourseSearch(int departureCityID,int arrivalCityID)
 	{
 		List <Course> listAfterSearchDirectConnection = findConnection(departureCityID,arrivalCityID);
@@ -48,11 +48,11 @@ public class CourseSearch
 		courseList = CourseController.loadCityNames(courseList,cityList);
 		courseList = CourseController.loadSymbols(courseList,symbolList);
 		BusStopDAOImpl StopIMPL = new BusStopDAOImpl(dataForDAO);
-		courseList = CourseController.loadStopList(courseList,StopIMPL);
+		//courseList = CourseController.loadStopList(courseList,StopIMPL);
 		courseList = CourseController.loadStopListCityNames(courseList,cityList);
 		
 		return courseList;
 	}
 	
-	
+	*/
 }

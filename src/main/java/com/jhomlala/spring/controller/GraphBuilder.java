@@ -27,11 +27,7 @@ public class GraphBuilder
 		buildGraph();
 		//drawGraph();
 	}
-	
-	
-	
-	
-	
+
 	public List<Vertex> getGraph()
 	{
 		return vertexList;
@@ -39,13 +35,13 @@ public class GraphBuilder
 	
 	private void drawGraph() 
 	{
-		for (int i=0;i<vertexList.size();i++)
+		for (Vertex vertex: vertexList)
 		{
-			System.out.println("VERTEX ID:"+vertexList.get(i).getVertexID());
-			List <Node> nodeList = vertexList.get(i).getNodeList();
-			for (int k=0;k<nodeList.size();k++)
+			System.out.println("VERTEX ID:"+vertex.getVertexID());
+			List <Node> nodeList = vertex.getNodeList();
+			for (Node node:nodeList)
 			{
-				System.out.println("->NODE ID:"+nodeList.get(k).getNodeID()+", "+nodeList.get(k).getConnectedFromVertexID()+"->"+nodeList.get(k).getConnectedToVertexID());
+				System.out.println("->NODE ID:"+node.getNodeID()+", "+node.getConnectedFromVertexID()+"->"+node.getConnectedToVertexID());
 			}
 		}
 		
@@ -57,19 +53,12 @@ public class GraphBuilder
 	public void buildGraph()
 	{
 		vertexList = new ArrayList<Vertex>();
-		for (int i=0;i<courseList.size();i++)
+		for (Course course: courseList)
 		{
-			if (!(vertexExists(courseList.get(i).getArrivalCityID())))
-			{
-				createVertex(courseList.get(i).getArrivalCityID());
-			}
-			if (!(vertexExists(courseList.get(i).getDepartureCityID())))
-			{
-				createVertex(courseList.get(i).getDepartureCityID());
-			}
-			addNodes(courseList.get(i));
-			
-			
+			createVertex(course.getArrivalCityID());
+			createVertex(course.getDepartureCityID());
+			addNodes(course);
+
 		}
 		
 	}
@@ -82,34 +71,32 @@ public class GraphBuilder
 		node.setNodeID(course.getCourseID());
 		node.setConnectedFromVertexID(course.getDepartureCityID());
 		node.setConnectedToVertexID(course.getArrivalCityID());
-		
-		for (int i=0;i<vertexList.size();i++)
+		addNodeToVertex(node,course.getArrivalCityID());
+		addNodeToVertex(node,course.getDepartureCityID());
+	}
+
+	private void addNodeToVertex(Node node, int vertexID) 
+	{
+		for (Vertex vertex: vertexList)
 		{
-			if (vertexList.get(i).getVertexID() == course.getArrivalCityID())
-			{
-				vertexList.get(i).getNodeList().add(node);
-			}
-			if (vertexList.get(i).getVertexID() == course.getDepartureCityID())
-			{
-				vertexList.get(i).getNodeList().add(node);
-			}
+			if (vertex.getVertexID() == vertexID)
+				vertex.getNodeList().add(node);
 		}
 		
 	}
 
 	private void createVertex(int cityID) 
 	{
-		Vertex vertex = new Vertex();
-		vertex.setVertexID(cityID);
-		vertex.setNodeList(new ArrayList<Node>());
-		vertexList.add(vertex);
-		System.out.println("Build vertex id:"+cityID);
+		if (!(vertexExists(cityID)))
+		{
+			Vertex vertex = new Vertex();
+			vertex.setVertexID(cityID);
+			vertex.setNodeList(new ArrayList<Node>());
+			vertexList.add(vertex);
+		}
 		
 	}
 
-	
-
-	
 	private boolean vertexExists(int cityID) 
 	{
 		for (int i=0;i<vertexList.size();i++)
@@ -131,12 +118,13 @@ public class GraphBuilder
 		courseList = CourseIMPL.listCourses();
 		cityList = Startup.getCityMapper().getCityList();
 		symbolList = Startup.getSymbolMapper().getSymbolList();
+		CourseController courseController = new CourseController();
 		
-		courseList = CourseController.loadCityNames(courseList,cityList);
-		courseList = CourseController.loadSymbols(courseList,symbolList);
+		courseList = courseController.loadCityNames(courseList,cityList);
+		courseList = courseController.loadSymbols(courseList,symbolList);
 		BusStopDAOImpl StopIMPL = new BusStopDAOImpl(dataForDAO);
-		courseList = CourseController.loadStopList(courseList,StopIMPL);
-		courseList = CourseController.loadStopListCityNames(courseList,cityList);
+		courseList = courseController.loadStopList(courseList,StopIMPL);
+		courseList = courseController.loadStopListCityNames(courseList,cityList);
 		
 	
 	}

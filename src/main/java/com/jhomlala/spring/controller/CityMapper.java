@@ -31,100 +31,111 @@ public class CityMapper {
 	  		voivodeshipList = voivodeshipListReceived;
 	  		loadCities();
 	  	}
+	  	
 	  		
 	  	private void loadCities()
 	  	{
 	  		
-
-	    ClassLoader classLoader = getClass().getClassLoader();
-
-		File file = new File(classLoader.getResource("miasta.xml").getFile());
-		DocumentBuilder dBuilder;
-		try {
-			dBuilder = DocumentBuilderFactory.newInstance()
-			        .newDocumentBuilder();Document 
-			doc = dBuilder.parse(file);
-			doc.getDocumentElement().normalize();
-
-		
-		
-			NodeList nList = doc.getElementsByTagName("row");
-			for (int i=0;i<nList.getLength();i++)
+	  		Document document = loadDocument();
+			NodeList nodeList = document.getElementsByTagName("row");
+			loadCitiesFromNodeList(nodeList); 	
+	  	}
+	  	
+	  	private Document loadDocument()
+	  	{
+	  		ClassLoader classLoader = getClass().getClassLoader();
+	  		Document document = null;
+	  		File file = new File(classLoader.getResource("miasta.xml").getFile());
+			try 
 			{
+				DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+				document = documentBuilder.parse(file);
+				document.getDocumentElement().normalize();
+			} 
+			catch (ParserConfigurationException e) 
+			{
+				System.err.println("Error: ParserConfigurationException.");
+			} 
+			catch (SAXException e) 
+			{
+				System.err.println("Error: SAXException.");
+			} 
+			catch (IOException e) 
+			{
+				System.err.println("Error: IOException.");
+			}
+			return document;
+	  	}
+	  	
+	  	private void loadCitiesFromNodeList(NodeList nodeList)
+	  	{
+	  		for (int i=0;i<nodeList.getLength();i++)
+			{
+	  			NodeList childrenNodeList = nodeList.item(i).getChildNodes();
 				City city = new City();
 				city.setCityID(i);
-				NodeList nList2 = nList.item(i).getChildNodes();
-				for (int k=0;k<nList2.getLength();k++)
-				{
-					if (nList2.item(k).getNodeName().equals("col"))
-							{
-								Element element = (Element) nList2.item(k);
-								if (element.getAttribute("name").equals("NAZWA"))
-								{
-									city.setCityName(element.getTextContent());
-								}
-								if (element.getAttribute("name").equals("WOJ"))
-								{
-									city.setVoivodeshipID(Integer.valueOf(element.getTextContent()));
-								}
-								if (element.getAttribute("name").equals("POW"))
-								{
-									city.setDistrictID(Integer.valueOf(element.getTextContent()));
-								}
-							}
-				}
-				 
+				city = loadCityDataFromChildrenNodeList(city,childrenNodeList);				 
 				city = getCityDistrictName(city);
 				city = getCityVoivodeshipName(city);
 				city = renameVoivodeshipNames(city);
 				cityList.add(city);
-				
-				
-				
-			}
-				
+			}	
 			
-	  	
-		} catch (ParserConfigurationException | SAXException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-	  	}
 	  	
-	  	private City renameVoivodeshipNames(City city) 
+
+		private City loadCityDataFromChildrenNodeList(City city, NodeList childrenNodeList) 
+		{
+			for (int k=0;k<childrenNodeList.getLength();k++)
+			{
+				if (childrenNodeList.item(k).getNodeName().equals("col"))
+						{
+							Element element = (Element) childrenNodeList.item(k);
+							if (element.getAttribute("name").equals("NAZWA"))
+							{
+								city.setCityName(element.getTextContent());
+							}
+							if (element.getAttribute("name").equals("WOJ"))
+							{
+								city.setVoivodeshipID(Integer.valueOf(element.getTextContent()));
+							}
+							if (element.getAttribute("name").equals("POW"))
+							{
+								city.setDistrictID(Integer.valueOf(element.getTextContent()));
+							}
+						}
+			}
+			return city;
+		}
+
+
+		private City renameVoivodeshipNames(City city) 
 	  	{
 			String voivodeshipName = city.getVoivodeshipName().toLowerCase();
 			city.setVoivodeshipName(Character.toString(voivodeshipName.charAt(0)).toUpperCase()+voivodeshipName.substring(1));
 			return city;
 		}
-
-		static int countz=0;
 		private City getCityVoivodeshipName(City city) 
 		{
-			for (int w=0;w<voivodeshipList.size();w++)
+			for (Voivodeship voivodeship: voivodeshipList)
 			{
-					if (city.getVoivodeshipID()==voivodeshipList.get(w).getID())
-					{
-						city.setVoivodeshipName(voivodeshipList.get(w).getName());
-						countz++;
-					}
+					if (city.getVoivodeshipID()==voivodeship.getID())
+						city.setVoivodeshipName(voivodeship.getName());
 			}
-
+			
 			return city;
 		}
-		private City getCityDistrictName(City city) {
-			for (int w=0;w<voivodeshipList.size();w++)
+		private City getCityDistrictName(City city)
+		{
+			for (Voivodeship voivodeship: voivodeshipList)
 			{
-					if (city.getVoivodeshipID()==voivodeshipList.get(w).getID())
+					if (city.getVoivodeshipID()==voivodeship.getID())
 					{
-						List <District> districtList = voivodeshipList.get(w).getDistrictList();
-						for (int d=0;d<districtList.size();d++)
+						List <District> districtList = voivodeship.getDistrictList();
+						for (District district: districtList)
 						{
-							if (districtList.get(d).getID()==city.getDistrictID())
-							{
-								city.setDistrictName(districtList.get(d).getName());
-								
-							}
+							if (district.getID()==city.getDistrictID())
+								city.setDistrictName(district.getName());
 						}
 					}
 			}

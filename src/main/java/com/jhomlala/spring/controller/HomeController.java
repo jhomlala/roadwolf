@@ -49,7 +49,7 @@ public class HomeController {
 	GraphSearch GS = new GraphSearch();
 	List <Vertex> vertexList = Startup.getGraphBuilder().getGraph();
 	Vertex a = Startup.getGraphBuilder().getVertexWithID(64653);
-	Vertex b = Startup.getGraphBuilder().getVertexWithID(101);
+	Vertex b = Startup.getGraphBuilder().getVertexWithID(0);
 	System.out.println(a.getVertexID());
 	System.out.println(b.getVertexID());
 	GS.findNodesBetweenPoints(a, b);
@@ -62,7 +62,7 @@ public class HomeController {
 	@RequestMapping(value = "course", method = RequestMethod.POST)
 	public ModelAndView viewPlayer(ModelAndView model,HttpServletRequest request) throws IOException 
 	{
-		CourseSearch courseSearch = new CourseSearch(99064, 100); 
+		//CourseSearch courseSearch = new CourseSearch(99064, 64653); 
 		
 		//List <Course> courseList = CourseSearch.findDirectConnection(64653, 990641);
 		List <Course> courseList = null;
