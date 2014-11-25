@@ -3,7 +3,11 @@ package com.jhomlala.spring.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
+import com.jhomlala.spring.config.MvcConfiguration;
 import com.jhomlala.spring.dao.BusStopDAOImpl;
+import com.jhomlala.spring.dao.CourseDAOImpl;
 import com.jhomlala.spring.model.City;
 import com.jhomlala.spring.model.Course;
 import com.jhomlala.spring.model.Stop;
@@ -11,6 +15,54 @@ import com.jhomlala.spring.model.Symbol;
 
 public class CourseController 
 {
+
+	private List <Course> courseList;
+	private List <City> cityList;
+	private List <Symbol> symbolList;
+	MvcConfiguration config;
+	DataSource dataForDAO;
+	CourseDAOImpl CourseIMPL;
+	BusStopDAOImpl StopIMPL;
+	
+	public CourseController()
+	{
+		loadConfiguration();
+		loadCourseListFromDatabase();
+		loadElementsForCourseFromStartup();
+		
+		courseList = loadCityNames(courseList,cityList);
+		courseList = loadSymbols(courseList,symbolList);
+		courseList = loadStopList(courseList,StopIMPL);
+		courseList = loadStopListCityNames(courseList,cityList);
+	}
+	
+	
+	
+	private void loadElementsForCourseFromStartup() 
+	{
+		cityList = Startup.getCityMapper().getCityList();
+		symbolList = Startup.getSymbolMapper().getSymbolList();
+		
+	}
+
+
+
+	private void loadCourseListFromDatabase() 
+	{
+		courseList = CourseIMPL.listCourses();	
+	}
+
+
+
+	private void loadConfiguration() 
+	{
+		config = new MvcConfiguration();
+		dataForDAO = config.getDataSource();
+		CourseIMPL = new CourseDAOImpl(dataForDAO);
+		StopIMPL = new BusStopDAOImpl(dataForDAO);
+	}
+
+
 
 	public  List<Course> loadStopList(List<Course> courseList, BusStopDAOImpl stopIMPL)
 	{
@@ -82,6 +134,13 @@ public class CourseController
 		}
 		
 		return courseList;
+	}
+	
+	public List<Course> getCourseList()
+	{
+	
+		return courseList;
+		
 	}
 	   
 }

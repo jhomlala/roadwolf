@@ -2,6 +2,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html>
     <head>
@@ -62,20 +63,24 @@
 		<br>
 		 <div class="ui-widget">
                 <label for="cityFrom">Z:</label>
-                <input id="cityFrom" />
+                <input id="cityFrom" name="cityFrom" />
          
                 <label for="cityTo">Do:</label>
-                <input id="cityTo" />
+                <input id="cityTo" name="cityTo" />
             </div>
 	    <br><br><br>  
-        Czas:<input id="datetimepicker" title='Data i czas o ktorej chcesz wyruszyc.' type="text" >
+        Czas:<input id="datetimepicker" name="datetimepicker" title='Data i czas o ktorej chcesz wyruszyc.' type="text" >
 
+      <br/>
 
 
  
     <br><br><input type="submit">
     
     </form>
+    
+     
+    
     </center>
 	</div> <br><br>
 

@@ -3,6 +3,7 @@ package com.jhomlala.spring.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Deque;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -19,6 +20,7 @@ import com.jhomlala.spring.dao.CourseDAOImpl;
 import com.jhomlala.spring.dao.CourseMapper;
 import com.jhomlala.spring.model.City;
 import com.jhomlala.spring.model.Course;
+import com.jhomlala.spring.model.Node;
 import com.jhomlala.spring.model.Stop;
 import com.jhomlala.spring.model.Symbol;
 import com.jhomlala.spring.model.Time;
@@ -45,14 +47,6 @@ public class HomeController {
 	
 	@RequestMapping(value="/")
 	public ModelAndView home(ModelAndView model) {
-		
-	GraphSearch GS = new GraphSearch();
-	List <Vertex> vertexList = Startup.getGraphBuilder().getGraph();
-	Vertex a = Startup.getGraphBuilder().getVertexWithID(64653);
-	Vertex b = Startup.getGraphBuilder().getVertexWithID(0);
-	System.out.println(a.getVertexID());
-	System.out.println(b.getVertexID());
-	GS.findNodesBetweenPoints(a, b);
 	
 	model.setViewName("home");
 		return model;
@@ -62,15 +56,17 @@ public class HomeController {
 	@RequestMapping(value = "course", method = RequestMethod.POST)
 	public ModelAndView viewPlayer(ModelAndView model,HttpServletRequest request) throws IOException 
 	{
-		//CourseSearch courseSearch = new CourseSearch(99064, 64653); 
-		
-		//List <Course> courseList = CourseSearch.findDirectConnection(64653, 990641);
+
 		List <Course> courseList = null;
-		//Map Time class from String class
-		String time = request.getParameter("time");
-		//TimeMapper timemap = new TimeMapper(time);
-		//Time timeMapped = timemap.getTime();
-		 
+
+		String time = request.getParameter("datetimepicker");
+		System.out.println(time);
+		String cityFrom = request.getParameter("cityFrom");
+		String cityTo = request.getParameter("cityTo");
+		System.out.println(cityFrom);
+		System.out.println(cityTo);
+		
+		System.out.println(cityTo.substring(1,cityTo.indexOf(')')));
 		
 		
 		//model.addObject("timeMapped",timeMapped);

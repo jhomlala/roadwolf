@@ -77,12 +77,7 @@ public class GraphSearch
 	{
 		for (int i=0;i<vertexList.size();i++)
 		{
-			//System.out.println("VERTEX ID:"+vertexList.get(i).getVertexID());
-			List <Node> nodeList = vertexList.get(i).getNodeList();
-			for (int k=0;k<nodeList.size();k++)
-			{
-				System.out.println("->NODE ID:"+nodeList.get(k).getNodeID()+", "+nodeList.get(k).getConnectedFromVertexID()+"->"+nodeList.get(k).getConnectedToVertexID());
-			}
+			System.out.println("VERTEX ID:"+vertexList.get(i).getVertexID());
 		}
 		
 	}

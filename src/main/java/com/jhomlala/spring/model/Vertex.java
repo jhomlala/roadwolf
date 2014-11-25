@@ -2,7 +2,7 @@ package com.jhomlala.spring.model;
 
 import java.util.List;
 
-public class Vertex
+public class Vertex implements Comparable
 {
 	private int vertexID ; // its CityID
 	private List <Node> nodeList; // its Course List - list of all courses from cityID
@@ -26,6 +26,12 @@ public class Vertex
 
 	public void setNodeList(List<Node> nodeList) {
 		this.nodeList = nodeList;
+	}
+
+	@Override
+	public int compareTo(Object arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

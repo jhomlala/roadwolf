@@ -17,10 +17,9 @@ import com.jhomlala.spring.model.Vertex;
 public class GraphBuilder
 {
 	
-	private List <Symbol> symbolList;
 	private List <Course> courseList;
-	private List <City> cityList;
 	private List <Vertex> vertexList;
+	
 	public GraphBuilder()
 	{
 		buildCourseList();
@@ -32,21 +31,6 @@ public class GraphBuilder
 	{
 		return vertexList;
 	}
-	
-	private void drawGraph() 
-	{
-		for (Vertex vertex: vertexList)
-		{
-			System.out.println("VERTEX ID:"+vertex.getVertexID());
-			List <Node> nodeList = vertex.getNodeList();
-			for (Node node:nodeList)
-			{
-				System.out.println("->NODE ID:"+node.getNodeID()+", "+node.getConnectedFromVertexID()+"->"+node.getConnectedToVertexID());
-			}
-		}
-		
-	}
-
 
 
 
@@ -69,9 +53,7 @@ public class GraphBuilder
 	{
 		Node node = new Node();
 		node.setNodeID(course.getCourseID());
-		node.setConnectedFromVertexID(course.getDepartureCityID());
 		node.setConnectedToVertexID(course.getArrivalCityID());
-		addNodeToVertex(node,course.getArrivalCityID());
 		addNodeToVertex(node,course.getDepartureCityID());
 	}
 
@@ -111,22 +93,8 @@ public class GraphBuilder
 
 	public void buildCourseList()
 	{
-		MvcConfiguration config = new MvcConfiguration();
-		DataSource dataForDAO = config.getDataSource();
-		CourseDAOImpl CourseIMPL = new CourseDAOImpl(dataForDAO);
-		
-		courseList = CourseIMPL.listCourses();
-		cityList = Startup.getCityMapper().getCityList();
-		symbolList = Startup.getSymbolMapper().getSymbolList();
 		CourseController courseController = new CourseController();
-		
-		courseList = courseController.loadCityNames(courseList,cityList);
-		courseList = courseController.loadSymbols(courseList,symbolList);
-		BusStopDAOImpl StopIMPL = new BusStopDAOImpl(dataForDAO);
-		courseList = courseController.loadStopList(courseList,StopIMPL);
-		courseList = courseController.loadStopListCityNames(courseList,cityList);
-		
-	
+		courseList = courseController.getCourseList();
 	}
 	
 	public Vertex getVertexWithID(int id)
