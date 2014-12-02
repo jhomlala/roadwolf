@@ -17,7 +17,7 @@ import com.jhomlala.spring.model.Employee;
 
 @Controller
 public class AjaxController {
-	
+	 
  
 
  

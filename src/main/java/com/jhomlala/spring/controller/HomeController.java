@@ -49,6 +49,7 @@ public class HomeController {
 	public ModelAndView home(ModelAndView model) {
 	
 	model.setViewName("home");
+	CourseController cors = new CourseController(); 
 		return model;
 	}
 	
@@ -58,7 +59,7 @@ public class HomeController {
 	{
 
 		List <Course> courseList = null;
-
+		
 		String time = request.getParameter("datetimepicker");
 		System.out.println(time);
 		String cityFrom = request.getParameter("cityFrom");
@@ -66,7 +67,15 @@ public class HomeController {
 		System.out.println(cityFrom);
 		System.out.println(cityTo);
 		
-		System.out.println(cityTo.substring(1,cityTo.indexOf(')')));
+		int toID = Integer.parseInt(cityTo.substring(1,cityTo.indexOf(')')));
+		int fromID = Integer.parseInt(cityFrom.substring(1,cityTo.indexOf(')')));
+		BFSSearch bfss = new BFSSearch(Startup.getGraphBuilder().getGraph(),fromID,toID);
+		Deque <Integer> path = bfss.getPath();
+		CourseController controler = new CourseController();
+		courseList = controler.loadCoursesFromPath(path,time);
+
+
+		
 		
 		
 		//model.addObject("timeMapped",timeMapped);

@@ -49,8 +49,8 @@ public class BFSSearch
 			{
 				Vertex vertexRemoved = vertexesToCheck.remove();
 				vertexChecked.add(vertexRemoved);
-				List <Node> nodeList = vertexRemoved.getNodeList();
-				for (Node node: nodeList)
+				List <Node> nodeList = vertexRemoved.getNodeList(); 
+				for (Node node: nodeList) 
 				{
 					Vertex vertexToCheck = getVertexFromNode(node);
 					if (!(isVertexChecked(vertexToCheck)))

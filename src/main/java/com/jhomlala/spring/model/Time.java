@@ -31,6 +31,66 @@ public class Time
 		this.minute = timeMapper.getTime().getMinute();
 		this.hour = timeMapper.getTime().getHour();
 	}
+	public Time(Time time,int range)
+	{
+		this.hour = time.getHour();
+		this.minute = time.getMinute();
+		this.second = time.getSecond();
+		
+		boolean isNegative = false;
+		if (range < 0) 
+			isNegative = true;
+		range = Math.abs(range);
+		
+		int rangeHour = range / 60;
+		int rangeMinute = Math.abs(rangeHour*60 - range);
+
+		if (!isNegative)
+		{
+			
+			this.hour = this.hour + rangeHour;
+			if (this.minute + rangeMinute > 60)
+			{
+				this.hour++;
+				//10.45 -> + 25 -> 11:10
+				int rangeMinus = 60 - this.minute;
+				rangeMinute = rangeMinute - rangeMinus;
+				this.minute = rangeMinute;
+			}
+			else
+			{
+				this.minute = this.minute+rangeMinute;
+			}
+		}
+		else
+		{
+			//is negative
+		
+			this.hour = this.hour - rangeHour;
+			if (this.minute - rangeMinute < 0)
+			{
+				this.hour--;
+				int rangeMinus = this.minute;
+				rangeMinute = rangeMinute - rangeMinus;
+				this.minute = 60 - rangeMinute;
+			}
+			else
+			{
+				this.minute = this.minute - rangeMinute;
+			}
+			
+			
+		}
+		if (this.minute == 60)
+		{ 
+			this.hour++;
+			this.minute = 0;
+		}
+		
+		
+		
+	}
+	
 	public int getHour() {
 		return hour;
 	}
@@ -50,5 +110,9 @@ public class Time
 		this.second = second;
 	}
 	
+	public String toString()
+	{
+		return this.hour + ":" + this.minute + ":" + this.second ;
+	}
 	
 }
