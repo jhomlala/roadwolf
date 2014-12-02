@@ -3,10 +3,13 @@
 <symbol>
 	<short>a</short>
 	<description>nie kursuje w pierwszy dzień Świąt Wielkanocnych oraz w dniu 25 XII</description>
+
 </symbol>
 <symbol>
 	<short>b</short>
 	<description>nie kursuje w dniu 1.I, w pierwszy dzień Świąt Wielkanocnych i w dniu 25 XII</description>
+
+
 </symbol>
 <symbol>
 	<short>C</short>

@@ -145,7 +145,7 @@ public class CourseController
 	{
 		TimeMapper timemapper = new TimeMapper(time);
 		Time currentTime = timemapper.getTime();
-		currentTime = new Time(8,0,0);
+		currentTime = new Time(time);
 		List <Integer> pathList = transformPathToList(path);
 		for (int a:pathList)
 			System.out.println(a);

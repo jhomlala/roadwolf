@@ -57,26 +57,24 @@ public class HomeController {
 	@RequestMapping(value = "course", method = RequestMethod.POST)
 	public ModelAndView viewPlayer(ModelAndView model,HttpServletRequest request) throws IOException 
 	{
-
 		List <Course> courseList = null;
-		
+		CourseController controler = new CourseController();
+		FormCheck formCheck = new FormCheck();
 		String time = request.getParameter("datetimepicker");
-		System.out.println(time);
 		String cityFrom = request.getParameter("cityFrom");
 		String cityTo = request.getParameter("cityTo");
-		System.out.println(cityFrom);
-		System.out.println(cityTo);
+
 		
-		int toID = Integer.parseInt(cityTo.substring(1,cityTo.indexOf(')')));
-		int fromID = Integer.parseInt(cityFrom.substring(1,cityTo.indexOf(')')));
+		int toID = formCheck.getNumberFromCityString(cityTo);
+		int fromID = formCheck.getNumberFromCityString(cityFrom);
+		
 		BFSSearch bfss = new BFSSearch(Startup.getGraphBuilder().getGraph(),fromID,toID);
 		Deque <Integer> path = bfss.getPath();
-		CourseController controler = new CourseController();
-		courseList = controler.loadCoursesFromPath(path,time);
-
-
+		String [] timeAndDateSplited = formCheck.checkDoesTimeAndDateValid(time);
 		
 		
+		courseList = controler.loadCoursesFromPath(path,timeAndDateSplited[1]);
+
 		
 		//model.addObject("timeMapped",timeMapped);
 		model.addObject("cslist", courseList);
