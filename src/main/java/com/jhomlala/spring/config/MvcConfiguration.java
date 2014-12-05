@@ -1,5 +1,7 @@
 package com.jhomlala.spring.config;
  
+import java.util.Properties;
+
 import javax.sql.DataSource;
 
 import com.jhomlala.spring.dao.BusStopDAO;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
@@ -35,6 +38,17 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 
+	@Bean
+	public SimpleMappingExceptionResolver getExceptionResolver()
+	{
+		SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
+		Properties properties = new Properties();
+		properties.put("com.jhomlala.spring.controller.SpringException","error");
+		//properties.put("defaultErrorView","ExceptionPage");
+		resolver.setExceptionMappings(properties);
+		return resolver;
+	}
+	
 	@Bean
 	public DataSource getDataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();

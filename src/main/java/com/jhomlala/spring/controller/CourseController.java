@@ -91,7 +91,7 @@ public class CourseController
 				if (course.getDepartureCityID() == city.getCityID())
 					course.setDepartureCity(city);
 			}
-		}
+		}      
 		return courseList;
 	}
 

@@ -57,5 +57,10 @@ public class City
 		this.cityName = cityName;
 	}
 	
+	public String toString()
+	{
+		return cityName;
+	}
+	
 	
 }

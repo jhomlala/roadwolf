@@ -28,6 +28,7 @@ import com.jhomlala.spring.model.Vertex;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,6 +51,7 @@ public class HomeController {
 	
 	model.setViewName("home");
 	CourseController cors = new CourseController(); 
+
 		return model;
 	}
 	
@@ -63,10 +65,15 @@ public class HomeController {
 		String time = request.getParameter("datetimepicker");
 		String cityFrom = request.getParameter("cityFrom");
 		String cityTo = request.getParameter("cityTo");
+		String cityFromHidden = request.getParameter("cityFromHidden");
+		String cityToHidden = request.getParameter("cityToHidden");
 
+		 
+		int toID = formCheck.checkCityID(cityToHidden);
+		int fromID = formCheck.checkCityID(cityFromHidden);
 		
-		int toID = formCheck.getNumberFromCityString(cityTo);
-		int fromID = formCheck.getNumberFromCityString(cityFrom);
+		if (toID == -1 || fromID == -1 )
+			throw new SpringException("Prosze wybrac miejscowosci ponownie.");
 		
 		BFSSearch bfss = new BFSSearch(Startup.getGraphBuilder().getGraph(),fromID,toID);
 		Deque <Integer> path = bfss.getPath();
@@ -83,6 +90,12 @@ public class HomeController {
 	    return model;
 	}
 
-	
+	@ExceptionHandler(com.jhomlala.spring.controller.SpringException.class)
+	public ModelAndView excHandler(SpringException springException) {
+		ModelAndView model = new ModelAndView();
+		model.addObject("exception",springException);
+		model.setViewName("ExceptionPage");
+		return model;
+	}
 
 }

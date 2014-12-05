@@ -1,5 +1,8 @@
 package com.jhomlala.spring.controller;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class FormCheck 
 {
 	
@@ -64,18 +67,19 @@ public class FormCheck
 			return false;
 	}
 	
-	public int getNumberFromCityString(String cityString)
+	public int checkCityID(String cityString)
 	{
-		if (cityString != null && cityString.length() > 0)
+		if (cityString != null)
 		{
-
-			int cityID = Integer.parseInt(cityString.substring(1,cityString.indexOf(')')));
-			return cityID;
+			if (cityString.matches("[0-9]+"))
+				return Integer.valueOf(cityString);
 		}
-
-		return 0;
+		
+		return -1;
 		
 	}
+		
 	
+
 	
 }
