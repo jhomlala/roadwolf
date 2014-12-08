@@ -55,7 +55,7 @@ public class AjaxController {
 		
 		// iterate a list and filter by tagName
 		for (City city : data) {
-			if (city.getCityName().contains(cityName)) {
+			if (city.getCityName().toLowerCase().contains(cityName.toLowerCase())) {
 				result.add(city);
 			}
 		}

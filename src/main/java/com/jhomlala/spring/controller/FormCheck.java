@@ -8,7 +8,7 @@ public class FormCheck
 	
 	public String [] checkDoesTimeAndDateValid(String timeAndDate)
 	{
-		
+		System.out.println(timeAndDate);
 		if (timeAndDate.matches("[a-zA-Z]+"))
 		{
 			return null;
