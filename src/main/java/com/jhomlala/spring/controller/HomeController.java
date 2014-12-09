@@ -3,6 +3,7 @@ package com.jhomlala.spring.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Deque;
 import java.util.List;
 import java.util.Timer;
@@ -18,9 +19,11 @@ import com.jhomlala.spring.dao.BusStopDAOImpl;
 import com.jhomlala.spring.dao.CourseDAO;
 import com.jhomlala.spring.dao.CourseDAOImpl;
 import com.jhomlala.spring.dao.CourseMapper;
+import com.jhomlala.spring.dao.OperatorDAO;
 import com.jhomlala.spring.model.City;
 import com.jhomlala.spring.model.Course;
 import com.jhomlala.spring.model.Node;
+import com.jhomlala.spring.model.Operator;
 import com.jhomlala.spring.model.Stop;
 import com.jhomlala.spring.model.Symbol;
 import com.jhomlala.spring.model.Time;
@@ -46,12 +49,20 @@ public class HomeController {
 	@Autowired
 	private BusStopDAO busStopDAO;
 	
+	@Autowired
+	private OperatorDAO operatorDAO;
+	
 	@RequestMapping(value="/")
 	public ModelAndView home(ModelAndView model) {
 	
 	model.setViewName("home");
-	CourseController cors = new CourseController(); 
-
+	
+	CalendarContoller con = new CalendarContoller();
+	List <Date> listDate = con.getEasternDaysForYear(2090);
+	for (Date date: listDate)
+	{
+		System.out.println(date);
+	}
 		return model;
 	}
 	
@@ -77,13 +88,19 @@ public class HomeController {
 		
 		BFSSearch bfss = new BFSSearch(Startup.getGraphBuilder().getGraph(),fromID,toID);
 		Deque <Integer> path = bfss.getPath();
+		
 		String [] timeAndDateSplited = formCheck.checkDoesTimeAndDateValid(time);
 		
+		if (timeAndDateSplited == null)
+			throw new SpringException("Prosze podac wlasciwy czas!");
+		else
+		{
+			courseList = controler.loadCoursesFromPath(path,timeAndDateSplited[1]);
+		}
 		
-		courseList = controler.loadCoursesFromPath(path,timeAndDateSplited[1]);
-
+		if (courseList.size() == 0 )
+			throw new SpringException("Nie znaleziono kursu o podanych warunkach.");
 		
-		//model.addObject("timeMapped",timeMapped);
 		model.addObject("cslist", courseList);
 	    model.setViewName("course");
 	    

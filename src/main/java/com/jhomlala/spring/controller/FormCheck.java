@@ -8,8 +8,8 @@ public class FormCheck
 	
 	public String [] checkDoesTimeAndDateValid(String timeAndDate)
 	{
-		System.out.println(timeAndDate);
-		if (timeAndDate.matches("[a-zA-Z]+"))
+		
+		if (timeAndDate.matches("[a-zA-Z]+") || timeAndDate.equals("____/__/__ __:__"))
 		{
 			return null;
 		}

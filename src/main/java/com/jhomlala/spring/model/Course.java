@@ -16,8 +16,9 @@ public class Course
 	private City departureCity;
 	private City arrivalCity;
 	private String symbols;
+	private Operator operator;
 	
-	
+
 	public Course()
 	{
 		
@@ -88,7 +89,12 @@ public class Course
 	public void setSymbols(String symbols) {
 		this.symbols = symbols;
 	}
-	
+	public Operator getOperator() {
+		return operator;
+	}
+	public void setOperator(Operator operator) {
+		this.operator = operator;
+	}
 }
 
 

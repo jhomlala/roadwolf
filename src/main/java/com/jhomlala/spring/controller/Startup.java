@@ -23,6 +23,7 @@ public class Startup implements ApplicationListener<ContextRefreshedEvent> {
 	private static CityMapper cityMapper;
 	private static SymbolMapper symbolMapper;
 	private static GraphBuilder graphBuilder;
+	private static OperatorController operatorController;
 	
   @Override
   public void onApplicationEvent(final ContextRefreshedEvent event) 
@@ -32,6 +33,7 @@ public class Startup implements ApplicationListener<ContextRefreshedEvent> {
 	  cityMapper = new CityMapper(territorialMapper.getVoivodeshipList());
 	  symbolMapper = new SymbolMapper();
 	  graphBuilder = new GraphBuilder();
+	  operatorController = new OperatorController();
   }
 
   
@@ -69,9 +71,9 @@ public class Startup implements ApplicationListener<ContextRefreshedEvent> {
 
 
 
-
-
-
+	public static OperatorController getOperatorController() {
+		return operatorController;
+	}
 
   
   

@@ -9,8 +9,10 @@ import javax.sql.DataSource;
 import com.jhomlala.spring.config.MvcConfiguration;
 import com.jhomlala.spring.dao.BusStopDAOImpl;
 import com.jhomlala.spring.dao.CourseDAOImpl;
+import com.jhomlala.spring.dao.OperatorDAOImpl;
 import com.jhomlala.spring.model.City;
 import com.jhomlala.spring.model.Course;
+import com.jhomlala.spring.model.Operator;
 import com.jhomlala.spring.model.Stop;
 import com.jhomlala.spring.model.Symbol;
 import com.jhomlala.spring.model.Time;
@@ -21,10 +23,13 @@ public class CourseController
 	private List <Course> courseList;
 	private List <City> cityList;
 	private List <Symbol> symbolList;
+	private List <Operator> operatorList;
 	MvcConfiguration config;
 	DataSource dataForDAO;
 	CourseDAOImpl CourseIMPL;
 	BusStopDAOImpl StopIMPL;
+	OperatorDAOImpl OperatorIMPL;
+	
 	
 	public CourseController()
 	{
@@ -36,17 +41,34 @@ public class CourseController
 		courseList = loadSymbols(courseList,symbolList);
 		courseList = loadStopList(courseList,StopIMPL);
 		courseList = loadStopListCityNames(courseList,cityList);
-		
+		courseList = loadOperators(operatorList);
 	
 		
 	}
 	
 	
 	
+	private List<Course> loadOperators(List<Operator> operatorList) 
+	{
+		for (Course course: courseList)
+		{
+			for (Operator operator: operatorList)
+			{
+				if (course.getOperatorID() == operator.getId())
+					course.setOperator(operator);
+			} 
+		}
+		return courseList;
+	}
+
+
+
 	private void loadElementsForCourseFromStartup() 
 	{
 		cityList = Startup.getCityMapper().getCityList();
 		symbolList = Startup.getSymbolMapper().getSymbolList();
+		operatorList = OperatorIMPL.listAllOperators();
+	
 		
 	}
 
@@ -55,6 +77,7 @@ public class CourseController
 	private void loadCourseListFromDatabase() 
 	{
 		courseList = CourseIMPL.listCourses();	
+		
 	}
 
 
@@ -65,6 +88,7 @@ public class CourseController
 		dataForDAO = config.getDataSource();
 		CourseIMPL = new CourseDAOImpl(dataForDAO);
 		StopIMPL = new BusStopDAOImpl(dataForDAO);
+		OperatorIMPL = new OperatorDAOImpl(dataForDAO);
 	}
 
 
@@ -198,14 +222,7 @@ public class CourseController
 			}
 		}
 	
-	
-		
-		
-		
-	
-		
-		
-		System.out.println("SIZE:"+pathCourseList.size());
+
 		return tempList;
 			
 	}

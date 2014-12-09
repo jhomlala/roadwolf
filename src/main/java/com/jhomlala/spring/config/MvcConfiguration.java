@@ -8,6 +8,8 @@ import com.jhomlala.spring.dao.BusStopDAO;
 import com.jhomlala.spring.dao.BusStopDAOImpl;
 import com.jhomlala.spring.dao.CourseDAO;
 import com.jhomlala.spring.dao.CourseDAOImpl;
+import com.jhomlala.spring.dao.OperatorDAO;
+import com.jhomlala.spring.dao.OperatorDAOImpl;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -68,5 +70,10 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	public BusStopDAO getBusStopDAO() {
 		return new BusStopDAOImpl(getDataSource());
 	}
+	@Bean
+	public OperatorDAO getOperatorDAO() {
+		return new OperatorDAOImpl(getDataSource());
+	}
+	
 
 }

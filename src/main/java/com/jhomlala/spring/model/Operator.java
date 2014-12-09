@@ -34,6 +34,9 @@ public class Operator
 		this.operatorName = operatorName;
 		this.operatorDescription = operatorDescription;
 	}
-	
+	public Operator()
+	{
+		
+	}
 	
 }
