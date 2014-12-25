@@ -15,7 +15,7 @@ public class OperatorMapper implements RowMapper<Operator>
 		Operator operator = new Operator();
 		operator.setId(rs.getInt("OPERATOR_ID"));
 		operator.setOperatorName(rs.getString("NAME"));
-		operator.setOperatorDescription("DESCRIPTION");
+		operator.setOperatorDescription(rs.getString("DESCRIPTION"));
 		return operator;
 	}
 }

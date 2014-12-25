@@ -58,8 +58,11 @@ public class HomeController {
 	model.setViewName("home");
 	
 	CalendarContoller con = new CalendarContoller();
-	List <Date> listDate = con.getEasternDaysForYear(2090);
-	for (Date date: listDate)
+	List <Date> listDate = con.getYear(2015);
+	List <Date> listDate2  = con.getVacation(2015);
+	List <Date> listDat3 = con.differenceTwoDateLists(listDate, listDate2);
+	List <Date> listDat4 = con.differenceTwoDateLists(listDat3, listDate2);
+	for (Date date: listDat4)
 	{
 		System.out.println(date);
 	}

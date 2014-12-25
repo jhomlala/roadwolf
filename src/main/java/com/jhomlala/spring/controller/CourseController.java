@@ -42,6 +42,7 @@ public class CourseController
 		courseList = loadStopList(courseList,StopIMPL);
 		courseList = loadStopListCityNames(courseList,cityList);
 		courseList = loadOperators(operatorList);
+
 	
 		
 	}

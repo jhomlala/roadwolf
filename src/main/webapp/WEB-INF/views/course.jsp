@@ -78,7 +78,7 @@
             <c:forEach items="${element.getStopList() }" var="stop">
             	${stop.getCityName() } - ${stop.getArrivalTime().getHour() }:${stop.getArrivalTime().getMinute() } - ${stop.getDepartureTime().getHour() }:${stop.getDepartureTime().getMinute() } 
             </c:forEach>">Zobacz przystanki</a></td>
-            <td>${element.getOperator().getOperatorName() }</td>
+            <td><a href="#" class='hastip' title='${element.getOperator().getOperatorDescription()}'>${element.getOperator().getOperatorName() }</a> </td>
    		</tr>
 	</c:forEach>
     
