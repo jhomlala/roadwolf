@@ -3,25 +3,34 @@
 <symbol>
 	<short>a</short>
 	<description>nie kursuje w pierwszy dzień Świąt Wielkanocnych oraz w dniu 25 XII</description>
-
+	<calendar>Eastern_1_Day</calendar>
+	<calendar>Christmas_2_Day</calendar>
 </symbol>
 <symbol>
 	<short>b</short>
 	<description>nie kursuje w dniu 1.I, w pierwszy dzień Świąt Wielkanocnych i w dniu 25 XII</description>
-
+	<calendar>New_Year_Eve_2_Day</calendar>
+	<calendar>Eastern_1_Day</calendar>
+	<calendar>Christmas_2_Day</calendar>
 
 </symbol>
 <symbol>
 	<short>C</short>
 	<description>kursuje w soboty, niedziele i święta</description>
+	<calendar>Week</calendar>
 </symbol>
 <symbol>
 	<short>c</short>
 	<description>nie kursuje w dniu 1.I, w pierwszy dzień Świąt Wielkanocnych oraz w dniach 25 i 26 XII</description>
+	<calendar>New_Year_Eve_2_Day</calendar>
+	<calendar>Christmas_2_Day</calendar>
+	<calendar>Christmas_3_Day</calendar>
 </symbol>
 <symbol>
 	<short>D</short>
 	<description>kursuje od poniedziałku do piątku oprócz świąt</description>
+	<calendar>Saturday</calendar>
+	<calendar>Sunday</calendar>
 </symbol>
 <symbol>
 	<short>d</short>

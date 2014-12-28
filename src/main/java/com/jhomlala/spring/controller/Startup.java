@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 import com.jhomlala.spring.config.MvcConfiguration;
 import com.jhomlala.spring.dao.BusStopDAO;
 import com.jhomlala.spring.dao.BusStopDAOImpl;
+import com.jhomlala.spring.model.CalendarSymbols;
+import com.jhomlala.spring.model.Symbol;
 
 
 @Component
@@ -34,6 +36,16 @@ public class Startup implements ApplicationListener<ContextRefreshedEvent> {
 	  symbolMapper = new SymbolMapper();
 	  graphBuilder = new GraphBuilder();
 	  operatorController = new OperatorController();
+	  
+	  for (Symbol symbol: symbolMapper.getSymbolList())
+	  {
+		  List <CalendarSymbols> calList = symbol.getCalendarSymbolsList();
+		  if (calList !=null)
+		  for (CalendarSymbols calendar:calList)
+		  {
+			  System.out.println(calendar);
+		  }
+	  }
   }
 
   

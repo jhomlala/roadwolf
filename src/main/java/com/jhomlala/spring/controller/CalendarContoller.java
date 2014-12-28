@@ -6,65 +6,149 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import com.jhomlala.spring.model.CalendarSymbols;
+
 
 public class CalendarContoller
 {
-	public enum CalendarSymbols {
-		Eeastern_1_Day,Eastern_2_Day,Christmas_1_Day,Christmas_2_Day,Christmas_3_Day,Friday,Saturday,Sunday,Vacation, 
-		Winter_Holidays,School_Working_Days,New_Year_Eve_1day,New_Year_Eve_2day,
-	}
+	
 	
 	public List <Date> getDateListFromCalendarSymbol(CalendarSymbols symbol,int year)
 	{
 		List <Date> returnList = new ArrayList <Date>();
-		List <Date> helperList;
+
 		switch (symbol)
 		{
-		case Eeastern_1_Day:
-		{
-			return getEasternDays(year);
+			case Eastern_1_Day:
+			{
+				List <Date> list = new ArrayList <Date>();
+				list.add(getEasternDays(year).get(0));
+				return list;
+			}
+			case Eastern_2_Day:
+			{
+				List <Date> list = new ArrayList <Date>();
+				list.add(getEasternDays(year).get(1));
+				return list;
+			}
+			case Christmas_1_Day:
+			{
+				List <Date> list = new ArrayList <Date>();
+				list.add(getChristmasDays(year).get(0));
+				return list;
+			}
+			case Christmas_2_Day:
+			{
+				List <Date> list = new ArrayList <Date>();
+				list.add(getChristmasDays(year).get(1));
+				return list;
+			}
+			case Christmas_3_Day:
+			{
+				List <Date> list = new ArrayList <Date>();
+				list.add(getChristmasDays(year).get(2));
+				return list;
+			}
+			case Friday:
+			{
+				return getFridays(year);
+			}
+			case Saturday:
+			{
+				return getSaturdays(year);
+			}
+			case Sunday:
+			{
+				return getSundays(year);
+			}
+			case Winter_Holidays:
+			{
+				return getYear(year);
+			}
+			case School_Working_Days:
+			{
+				return differenceTwoDateLists(differenceTwoDateLists(getYear(year),getVacation(year)),sumTwoDateLists(
+						getHolidays(year),sumTwoDateLists(getSaturdays(year),getSundays(year))));
+			}
+			case New_Year_Eve_1_Day:
+			{
+				List <Date> listNYE = getNewYearEve(year);
+				List <Date> listNYEReturn = new ArrayList <Date>();
+				listNYEReturn.add(listNYE.get(0));
+				
+				return listNYEReturn;
+			}
+			case New_Year_Eve_2_Day:
+			{
+				List <Date> listNYE = getNewYearEve(year);
+				List <Date> listNYEReturn = new ArrayList <Date>();
+				listNYEReturn.add(listNYE.get(1));
+				
+				return listNYEReturn;
+			}
+			case Week:
+			{
+				return differenceTwoDateLists(getYear(year),getWeekDays(year));
+			}
+			case Vacation:
+			{
+				return getVacation(year);
+			}
+			
 		}
-		case Eastern_2_Day:
-		{
-			return getEasternDays(year);
-		}
-		case Christmas_1_Day:
-		{
-			return getChristmasDays(year);
-		}
-		case Christmas_2_Day:
-		{
-			return getChristmasDays(year);
-		}
-		case Christmas_3_Day:
-		{
-			return getChristmasDays(year);
-		}
-		case Friday:
-		{
-			return getFridays(year);
-		}
-		case Saturday:
-		{
-			return getSaturdays(year);
-		}
-		case Sunday:
-		{
-			return getSundays(year);
-		}
-		
-		
-		
-		}
-		
-		
-	
-		
+
 		return returnList;
 	}
 	
 	
-	
+	public CalendarSymbols getCalendarSymbolsFromString(String calendarSymbolString)
+	{
+		switch (calendarSymbolString)
+		{
+		case "Eastern_1_Day":
+			return CalendarSymbols.Eastern_1_Day;
+		
+		case "Eastern_2_Day":
+			return CalendarSymbols.Eastern_2_Day;
+			
+		case "Christmas_1_Day":
+			return CalendarSymbols.Christmas_1_Day;
+			
+		case "Christmas_2_Day":
+			return CalendarSymbols.Christmas_2_Day;
+			
+		case "Christmas_3_Day":
+			return CalendarSymbols.Christmas_3_Day;
+			
+		case "Friday":
+			return CalendarSymbols.Friday;
+			
+		case "Saturday":
+			return CalendarSymbols.Saturday;
+			
+		case "Sunday":
+			return CalendarSymbols.Sunday;
+			
+		case "Vacation":
+			return CalendarSymbols.Vacation;
+			
+		case "Winter_Holidays":
+			return CalendarSymbols.Winter_Holidays;	
+			
+		case "School_Working_Days":
+			return CalendarSymbols.School_Working_Days;		
+			
+		case "New_Year_Eve_1_Day":
+			return CalendarSymbols.New_Year_Eve_1_Day;	
+			
+		case "New_Year_Eve_2_Day":
+			return CalendarSymbols.New_Year_Eve_2_Day;	
+			
+		case "Week":
+			return CalendarSymbols.Week;
+		}
+		return null;
+	}
 	
 	public CalendarContoller()
 	{
@@ -133,7 +217,42 @@ public class CalendarContoller
 	}
 	
 	
-	
+	public List<Date> getWeekDays(int year)
+	{
+		List <Date> weekdaysList = new ArrayList<Date>();
+		Calendar cal = new GregorianCalendar(year, 0, 1);
+
+		while (cal.getTime().getYear() != year-1900 + 1)
+		{
+			int day = cal.get(Calendar.DAY_OF_WEEK);
+			   
+			if (day == Calendar.MONDAY  ) 
+			{
+				weekdaysList.add(cal.getTime());
+			}
+			if (day == Calendar.TUESDAY ) 
+			{
+				weekdaysList.add(cal.getTime());
+			}
+			if (day == Calendar.THURSDAY  ) 
+			{
+				weekdaysList.add(cal.getTime());
+			}
+			if (day == Calendar.WEDNESDAY  ) 
+			{
+				weekdaysList.add(cal.getTime());
+			}
+			if (day == Calendar.FRIDAY  ) 
+			{
+				weekdaysList.add(cal.getTime());
+			}
+			
+			
+			cal.add(Calendar.DAY_OF_YEAR, 1);
+		}
+		
+		return weekdaysList;
+	}
 	
 	
 	public List<Date> getFridays(int year)
@@ -199,7 +318,7 @@ public class CalendarContoller
 		return saturdaysList;
 	}
 	
-	public List<Date> getHolidaysCalendar(int year)
+	public List<Date> getHolidays(int year)
 	{
 		List <Date> holidaysCalendar = new ArrayList<Date>();
 		holidaysCalendar.addAll(getEasternDays(year));
@@ -211,8 +330,10 @@ public class CalendarContoller
 	
 	public List<Date> getNewYearEve(int year)
 	{
-		Calendar calendar = new GregorianCalendar(year,0,1);
+		Calendar calendar = new GregorianCalendar(year,11,31);
 		List <Date> newYearEve = new ArrayList<Date>();
+		newYearEve.add(calendar.getTime());
+		calendar.add(Calendar.DAY_OF_MONTH, 1);
 		newYearEve.add(calendar.getTime());
 		return newYearEve;
 	}

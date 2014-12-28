@@ -16,6 +16,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import com.jhomlala.spring.model.CalendarSymbols;
 import com.jhomlala.spring.model.Symbol;
 
 public class SymbolMapper 
@@ -63,7 +64,7 @@ public class SymbolMapper
 			Symbol symbol = getSymbolFromNode(nodeSymbolList.item(i),i);	
 			symbolList.add(symbol);
 		}		
-	}
+	}  
 	
 	
 	
@@ -75,6 +76,14 @@ public class SymbolMapper
 			symbol.setSymbolID(index);
 			symbol.setSymbolDescription(currentElement.getElementsByTagName("description").item(0).getTextContent());
 			symbol.setSymbolShort(currentElement.getElementsByTagName("short").item(0).getTextContent());
+			List <CalendarSymbols> calendarSymbolsList = new ArrayList<CalendarSymbols>();
+			CalendarContoller calendarController = new CalendarContoller();
+			for (int i=0;i<currentElement.getElementsByTagName("calendar").getLength();i++)
+			{
+				
+				calendarSymbolsList.add(calendarController.getCalendarSymbolsFromString(currentElement.getElementsByTagName("calendar").item(i).getTextContent()));
+			}
+			symbol.setCalendarSymbolsList(calendarSymbolsList);
 			return symbol;
 		}
 		return null;
