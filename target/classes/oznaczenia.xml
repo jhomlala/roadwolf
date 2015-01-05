@@ -35,6 +35,11 @@
 <symbol>
 	<short>d</short>
 	<description>nie kursuje w dniu 1.I, w pierwszy i drugi dzień Świąt Wielkanocnych oraz w dniach 25 i 26 XII</description>
+		<calendar>New_Year_Eve_2_Day</calendar>
+	<calendar>Eastern_1_Day</calendar>
+	<calendar>Eastern_2_Day</calendar>
+	<calendar>Christmas_2_Day</calendar>
+	<calendar>Christmas_3_Day</calendar>
 </symbol>
 <symbol>
 	<short>E</short>
